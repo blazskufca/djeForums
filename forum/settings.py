@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 from pathlib import Path
 import os
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -22,7 +23,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = bool(int(os.environ.get('DEBUG')))
+DEBUG = bool(int(os.environ.get("DEBUG")))
 ALLOWED_HOSTS = [os.environ.get("HOST")]
 
 
@@ -34,8 +35,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    'my_forum',
-    'tinymce',
+    "my_forum",
+    "tinymce",
     "crispy_forms",
     "crispy_bootstrap5",
 ]
@@ -47,7 +48,7 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django_permissions_policy.PermissionsPolicyMiddleware",
-    'csp.middleware.CSPMiddleware',
+    "csp.middleware.CSPMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -62,8 +63,7 @@ ROOT_URLCONF = "forum.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / 'templates']
-        ,
+        "DIRS": [BASE_DIR / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -90,7 +90,7 @@ DATABASES = {
 }
 
 PASSWORD_HASHERS = [
-    'django.contrib.auth.hashers.Argon2PasswordHasher',
+    "django.contrib.auth.hashers.Argon2PasswordHasher",
 ]
 
 # Password validation
@@ -133,11 +133,9 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-STATICFILES_DIRS = [
-    BASE_DIR / 'static'
-]
+STATICFILES_DIRS = [BASE_DIR / "static"]
 
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 ########################################## SECURITY SETTINGS ###########################################################
 SESSION_COOKIE_SECURE = True
@@ -146,12 +144,12 @@ CSRF_COOKIE_SECURE = True
 CSRF_COOKIE_HTTPONLY = True
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
-X_FRAME_OPTIONS = 'DENY'
-SECURE_REFERRER_POLICY = 'same-origin'
+X_FRAME_OPTIONS = "DENY"
+SECURE_REFERRER_POLICY = "same-origin"
 SECURE_HSTS_SECONDS = 31536000
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 SECURE_HSTS_PRELOAD = True
-SECURE_CROSS_ORIGIN_OPENER_POLICY = 'same-origin'
+SECURE_CROSS_ORIGIN_OPENER_POLICY = "same-origin"
 
 CSP_DEFAULT_SRC = ["'none'"]
 CSP_SCRIPT_SRC = [
@@ -159,9 +157,15 @@ CSP_SCRIPT_SRC = [
     "https://cdn.jsdelivr.net",
     "https://code.jquery.com",
     "'self'",
-    "https://cdn.jsdelivr.net/"
+    "https://cdn.jsdelivr.net/",
 ]
-CSP_STYLE_SRC = ["https://stackpath.bootstrapcdn.com",  "'self'", "https://cdn.jsdelivr.net/", "'unsafe-inline'", "https://fonts.googleapis.com"]
+CSP_STYLE_SRC = [
+    "https://stackpath.bootstrapcdn.com",
+    "'self'",
+    "https://cdn.jsdelivr.net/",
+    "'unsafe-inline'",
+    "https://fonts.googleapis.com",
+]
 CSP_IMG_SRC = ["'self'", "*", "data:"]
 CSP_FONT_SRC = ["'self'", "https://fonts.googleapis.com"]
 
