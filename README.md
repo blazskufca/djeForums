@@ -15,7 +15,7 @@ A prototype of an open forum/discussion board
 - Rich text editor for posts and comments with full image support
 - Search functionality
 - Pagination
-- 
+
 ## Tech Stack
 
 - Django
