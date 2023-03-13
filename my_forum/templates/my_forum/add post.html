@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load crispy_forms_field %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_utils %}
+{% load static %}
+{% block title %} Make new post {% endblock title %}
+{% block head %}
+    <style>
+        .container{
+            margin-bottom: 1rem;
+        }
+    </style>
+{% endblock head %}
+{% block content %}
+{% include 'my_forum/includes/nav-bar.html' %}
+<div class="container">
+  <div class="mt-4 p-5 bg-light text-muted rounded">
+    <h1>djeForums
+    </h1>
+    <p>Share YOUR story....
+    </p>
+  </div>
+  <form method="POST">
+    <div class="container">
+      {% csrf_token %}
+      {{ form.title|as_crispy_field }}
+      {{ form.user|as_crispy_field }}
+      {{ form.post_content|as_crispy_field }}
+      {{ form.media }}
+      <button type="submit" class="btn btn-primary float-end">Post!
+      </button>
+    </div>
+  </form>
+</div>
+{% include 'my_forum/includes/footer.html' %}
+{% endblock content %}

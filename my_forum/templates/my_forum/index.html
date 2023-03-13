@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock title %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'my_forum/index.css' %}">
+{% endblock head %}
+{% block content %}
+{% include 'my_forum/includes/nav-bar.html' %}
+<div class="container">
+  <div class="mt-4 p-5 bg-light text-muted rounded">
+    <h1>djeForums
+    </h1>
+    <p>Join us by clicking on the button below...
+    </p>
+    <a type="button" class="btn btn-primary" href="{% url 'add-post' %}">Create new post!
+    </a>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <h3>Latest Discussions
+          </h3>
+        </div>
+        <div class="card-body">
+          {% if page_obj %}
+          {% for post in page_obj %}
+          <div class="card">
+            <div class="card-body" style="border: none;">
+              <h1>
+                <a class="text-muted"
+                   href="{% url 'post_detail' post.slug %}">{{ post.title }}
+                </a>
+              </h1>
+            </div>
+            <div class="card-footer">
+              <small>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                     fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z">
+                  </path>
+                  <path fill-rule="evenodd"
+                        d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z">
+                  </path>
+                </svg>
+                {{ post.user }} |
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                     fill="currentColor" class="bi bi-calendar-date" viewBox="0 0 16 16">
+                  <path d="M6.445 11.688V6.354h-.633A12.6 12.6 0 0 0 4.5 7.16v.695c.375-.257.969-.62 1.258-.777h.012v4.61h.675zm1.188-1.305c.047.64.594 1.406 1.703 1.406 1.258 0 2-1.066 2-2.871 0-1.934-.781-2.668-1.953-2.668-.926 0-1.797.672-1.797 1.809 0 1.16.824 1.77 1.676 1.77.746 0 1.23-.376 1.383-.79h.027c-.004 1.316-.461 2.164-1.305 2.164-.664 0-1.008-.45-1.05-.82h-.684zm2.953-2.317c0 .696-.559 1.18-1.184 1.18-.601 0-1.144-.383-1.144-1.2 0-.823.582-1.21 1.168-1.21.633 0 1.16.398 1.16 1.23z">
+                  </path>
+                  <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z">
+                  </path>
+                </svg>
+                {{ post.inital_post_date|date:"d. M. Y" }}
+                at {{ post.inital_post_date|date:"H:i" }} |
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                     fill="currentColor" class="bi bi-repeat" viewBox="0 0 16 16">
+                  <path d="M11 5.466V4H5a4 4 0 0 0-3.584 5.777.5.5 0 1 1-.896.446A5 5 0 0 1 5 3h6V1.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192Zm3.81.086a.5.5 0 0 1 .67.225A5 5 0 0 1 11 13H5v1.466a.25.25 0 0 1-.41.192l-2.36-1.966a.25.25 0 0 1 0-.384l2.36-1.966a.25.25 0 0 1 .41.192V12h6a4 4 0 0 0 3.585-5.777.5.5 0 0 1 .225-.67Z">
+                  </path>
+                </svg>
+                {{ post.comments.count }} | Last activity on {{ post.last_modified_post_date|date:"d. M. Y"  }}
+                at {{ post.last_modified_post_date|date:"H:i"  }}
+              </small>
+            </div>
+          </div>
+          <hr class="spacer">
+          {% endfor %}
+          {% else %}
+          <h1 style="text-align: center">No open threads 😔
+          </h1>
+          <p style="text-align: center;">Click the button bellow and open one!
+          </p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% include 'my_forum/includes/footer.html' %}
+{% endblock content %}
